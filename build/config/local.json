@@ -1,0 +1,27 @@
+{
+    "clear_build_path" : true,
+    "build_in": "img",
+    "next": [
+      {
+        "build": "docker",
+        "build_in" : "docker",
+        "config" : {
+          "base_image" : "eons/img_guest",
+          "combine": [
+            "php:fpm-alpine"
+          ],
+          "filesystems": [
+            {
+              "name": "data",
+              "mount": "/var/www"
+            }
+          ],
+          "image_name" : "eons/html_to_pdf.guest.img",
+          "image_os" : "alpine",
+          "tags" : [
+            "latest"
+          ]
+        }
+      }
+    ]
+  }
