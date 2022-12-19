@@ -3,19 +3,24 @@
     "build_in": "img",
     "next": [
       {
+        "clear_build_path" : false,
         "build": "docker",
         "build_in" : "docker",
+        "copy":[
+          {"/src":"src"},
+          {"/conf":"conf"}
+        ],
         "config" : {
           "base_image" : "eons/img_guest",
           "combine": [
-            "php:fpm-alpine"
+            "php:fpm-alpine",
+            "nginx:alpine"
           ],
-          "filesystems": [
-            {
-              "name": "data",
-              "mount": "/var/www"
-            }
+          "also":[
+            "COPY src /var/www/html",
+            "COPY conf/nginx /etc/nginx/conf.d"
           ],
+          "entrypoint":"nginx",
           "image_name" : "eons/html_to_pdf.guest.img",
           "image_os" : "alpine",
           "tags" : [
